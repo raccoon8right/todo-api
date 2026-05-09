@@ -1,0 +1,52 @@
+import pool from '../db.js'
+
+const getTareas = async (req, res) => {
+    const user_id = req.usuario.id
+    const [tareas] = await pool.query(
+        'SELECT * FROM tareas WHERE usuario_id = ?',
+        [user_id]
+    )
+    res.json(tareas)
+}
+
+const crearTarea = async (req, res) => {
+    const user_id = req.usuario.id
+    const { titulo, descripcion } = req.body
+    if (!titulo) {
+        return res.status(400).json({ mensaje: 'El campo "titulo" es obligatorio' })
+    }
+    await pool.query(
+        'INSERT INTO tareas (usuario_id, titulo, descripcion) VALUES (?, ?, ?)',
+        [user_id, titulo, descripcion]
+    )
+    res.status(201).json({ mensaje: 'Tarea creada correctamente' })
+}
+
+const editarTarea = async (req, res) => {
+    const user_id = req.usuario.id
+    const { id } = req.params
+    await pool.query(
+        'UPDATE tareas SET titulo = ?, descripcion = ?, completada = ? WHERE id = ? AND usuario_id = ?',
+        [req.body.titulo, req.body.descripcion, req.body.completada, id, user_id]
+    )
+    res.json({ mensaje: 'Tarea actualizada correctamente' })
+}
+
+const eliminarTarea = async (req, res) => {
+    const user_id = req.usuario.id
+    const { id } = req.params
+    await pool.query(
+        'DELETE FROM tareas WHERE id = ? AND usuario_id = ?',
+        [id, user_id]
+    )
+    res.json({ mensaje: 'Tarea eliminada correctamente' })
+}
+
+export { getTareas, crearTarea, editarTarea, eliminarTarea }
+
+/*
+    GET     /tareas                 Ver todas mis tareas
+    POST    /tareas                 Crear una tarea
+    PUT     /tareas/:id             Editar una tarea
+    DELETE  /tareas/:id             Eliminar una tarea
+*/
