@@ -37,22 +37,22 @@ Copiar el archivo `.env.example`, renómbralo a `.env` y completa los valores:
 
 **POST /auth/register**
 Body:
-\```json
+```json
 {
     "nombre": "Juan",
     "email": "juan@gmail.com",
     "password": "123456"
 }
-\```
+```
 
 **POST /auth/login**
 Body:
-\```json
+```json
 {
     "email": "juan@gmail.com",
     "password": "123456"
 }
-\```
+```
 
 ### Tareas - requieren header `Authorization: Bearer <token>`
 |  Método  |      Ruta      |      Descripción      |
