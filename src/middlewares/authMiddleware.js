@@ -16,10 +16,3 @@ const verificarToken = (req, res, next) => {
 }
 
 export { verificarToken }
-
-// seek -> next() es algo nuevo — investiga para qué sirve en Express y luego intenta el código.
-
-// next() -> next() es una función que se usa en middlewares para pasar el control al siguiente middleware en la cadena de ejecución.
-// next() es el mecanismo para continuar la cadena de middlewares.
-// Con JWT lo usas después de verificar exitosamente el token para permitir el acceso a la ruta protegida.
-// Si falla la verificación, respondes con error y omites next().

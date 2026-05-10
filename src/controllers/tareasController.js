@@ -43,10 +43,3 @@ const eliminarTarea = async (req, res) => {
 }
 
 export { getTareas, crearTarea, editarTarea, eliminarTarea }
-
-/*
-    GET     /tareas                 Ver todas mis tareas
-    POST    /tareas                 Crear una tarea
-    PUT     /tareas/:id             Editar una tarea
-    DELETE  /tareas/:id             Eliminar una tarea
-*/

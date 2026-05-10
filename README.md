@@ -6,8 +6,8 @@ El proyecto es un ejemplo de como crear una API para trabajar por capas con los 
 
 ## Requisitos
 
--Node.js
--MySQL
+- Node.js
+- MySQL
 
 ## Como instalarlo
 

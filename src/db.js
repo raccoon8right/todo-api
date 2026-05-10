@@ -6,13 +6,5 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database:process.env.DB_NAME
 })
-export default pool
 
-/*
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'todoapi'
-})
-*/
+export default pool
