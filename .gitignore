@@ -13,6 +13,7 @@ npm-debug.log*
 
 # Sistema operativo
 Thumbs.db # Windows
+desktop.ini
 
 # Editor
 .vscode/
