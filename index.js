@@ -20,6 +20,15 @@ app.use('/tareas', tareasRoutes)
 
 const port = process.env.PORT || 3000
 
+pool.getConnection()
+    .then(conn => {
+        console.log('Conexión a la base de datos exitosa')
+        conn.release()
+    })
+    .catch(err => {
+        console.error('Error conectando a la base de datos:', err.message)
+    })
+
 process.on('uncaughtException', (error) => {
     console.error('Error no capturado:', error)
 })
