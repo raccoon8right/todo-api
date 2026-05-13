@@ -19,6 +19,15 @@ app.use('/auth', authRoutes)
 app.use('/tareas', tareasRoutes)
 
 const port = process.env.PORT || 3000
+
+process.on('uncaughtException', (error) => {
+    console.error('Error no capturado:', error)
+})
+
+process.on('unhandledRejection', (error) => {
+    console.error('Promesa rechazada:', error)
+})
+
 app.listen(port, '0.0.0.0', () => {
     console.log(`Servidor en http://localhost:${port}`)
 })
