@@ -1,4 +1,10 @@
 import express from 'express'
+import 'dotenv/config'
+import pool from './src/db.js'
+import authRoutes from './src/routes/authRoutes.js'
+import tareasRoutes from './src/routes/tareasRoutes.js'
+import cors from 'cors'
+
 console.log('Variables de entorno:', {
     DB_HOST: process.env.DB_HOST,
     DB_USER: process.env.DB_USER,
@@ -6,10 +12,6 @@ console.log('Variables de entorno:', {
     DB_PORT: process.env.DB_PORT,
     PORT: process.env.PORT
 })
-import 'dotenv/config'
-import authRoutes from './src/routes/authRoutes.js'
-import tareasRoutes from './src/routes/tareasRoutes.js'
-import cors from 'cors'
 
 const app = express()
 app.use(cors())
