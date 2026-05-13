@@ -8,6 +8,10 @@ const register = async (req, res) => {
         if (!nombre || !email || !password) {
             return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' })
         }
+        const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+        if (!emailValido) {
+            return res.status(400).json({ mensaje: 'El email no tiene un formato válido' })
+        }
         const [existing] = await pool.query(
             'SELECT id FROM usuarios WHERE email = ?',
             [email]
