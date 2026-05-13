@@ -4,16 +4,23 @@ import jwt from 'jsonwebtoken'
 
 const register = async (req, res) => {
     try {
-        const { nombre, email, password } = req.body // step 1
+        const { nombre, email, password } = req.body
         if (!nombre || !email || !password) {
-            return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' }) // step 2
+            return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' })
         }
-        const passwordHash = await bcrypt.hash(password, 10) // step 3
+        const [existing] = await pool.query(
+            'SELECT id FROM usuarios WHERE email = ?',
+            [email]
+        )
+        if (existing.length > 0) {
+            return res.status(400).json({ mensaje: 'El email ya está registrado' })
+        }
+        const passwordHash = await bcrypt.hash(password, 10)
         await pool.query(
             'INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)',
-            [nombre, email, passwordHash] // step 4
+            [nombre, email, passwordHash]
         )
-        res.status(201).json({ mensaje: 'Usuario registrado correctamente' }) // step 5
+        res.status(201).json({ mensaje: 'Usuario registrado correctamente' })
     } catch (error) {
         res.status(500).json({ mensaje: 'Error interno del servidor' })
     }
