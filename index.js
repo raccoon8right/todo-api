@@ -42,3 +42,8 @@ process.on('unhandledRejection', (error) => {
 app.listen(port, '0.0.0.0', () => {
     console.log(`Servidor en http://localhost:${port}`)
 })
+
+process.on('SIGTERM', () => {
+    console.log('SIGTERM recibido, cerrando servidor...')
+    process.exit(0)
+})
