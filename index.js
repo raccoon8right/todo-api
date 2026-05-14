@@ -5,7 +5,12 @@ import tareasRoutes from './src/routes/tareasRoutes.js'
 import cors from 'cors'
 
 const app = express()
-app.use(cors())
+app.use(cors({
+    origin: [
+        'http://localhost:5173',
+        'https://raccoon8right.github.io'
+    ]
+}))
 app.use(express.json())
 
 app.use('/auth', authRoutes)
