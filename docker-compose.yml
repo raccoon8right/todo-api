@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: carla&adrian
+      MYSQL_DATABASE: todoapi
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    expose:
+      - "3306"
+  app:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: carla&adrian
+      DB_NAME: todoapi
+      DB_PORT: 3306
+      JWT_SECRET: 07515b3271b566a62498f63b589d6bf07a4b6011df54be46e6637ce7c5685ff5
+      PORT: 3000
+    depends_on:
+      - db
+volumes:
+  db_data:
